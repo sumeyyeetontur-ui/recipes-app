@@ -11,18 +11,17 @@
     />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg base-200 min-h-screen">
-    <header class="bg-base-100- shadow-sm py-6 mb-8">
+<body class="bg-base-200 min-h-screen">
+    <header class="bg-base-100 shadow-sm py-6 mb-8">
         <div class="max-w-6xl mx-auto px-4">
-            <h1 class="text-3xl font-bold text-base-contect">🍽️ Tarifler</h1>
+            <h1 class="text-3xl font-bold text-base-content">🍽️ Tarifler</h1>
             <p class="text-base-content/60 mt-1"></p>
         </div>
     </header>
-    <main class="max-w-6xl mx-auto px-4 pb-12"></main>
-    <div id="recipe-container"
-    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+ <main class="max-w-6xl mx-auto px-4 pb-12">
+<div id="recipe-container"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"> 
     </div>
-</body>
 </main>
     <script>
         async function getTarifler() {
@@ -35,24 +34,28 @@ function kartOlustur(tarif){
     return`
     <div class="card bg-base-100 shadow-md hover:shadow-xl transition-shadow">
     <figure>
-    img src="${tarif.image}"
+    <img src="${tarif.image}"
     alt="${tarif.name}"
     class="w-full h-48 object-cover">
     </figure>
     <div class="card-body p-4">
     <h2 class="card-title text-base">${tarif.name}</h2>
-    <div class="flex flex-wrap gap-3 text-base-content/70 mt-2"
-    <span>⏱Hazırlık:${tarif.prepTimeMinutes} dk</span>
+    <div class="flex flex-wrap gap-3 text-base-content/70 mt-2">    <span>⏱Hazırlık:${tarif.prepTimeMinutes} dk</span>
     <span>🔥 Pişirme:${tarif.cookTimeMinutes} dk</span>
-    <span>🍽 Porsiyon:${tarif.servinges}</span>
+    <span>🍽 Porsiyon:${tarif.servings}</span>
     </div>
     <div class="flex items-center gap-3 text-sm  mt-2">
     <span>⭐${tarif.rating}</span>
     <span class="text-base-content/60">💬 ${tarif.reviewCount}yorum </span>
     </div>
+    <div class="flex flex-wrap gap-1 mt-1">
+  <span class="badge badge-primary badge-sm">${tarif.cuisine}</span>
+  <span class="badge badge-secondary badge-sm">${tarif.difficulty}</span>
+  <span class="badge badge-accent badge-sm">${tarif.caloriesPerServing} kal</span>
+</div>
     <div class="flex flex-wrap gap-1 mt-2">
     ${tarif.tags.map(tag=>`
-        <span class="badge-outline badge-xs"{tag}></span>
+        <span class="badge badge-outline badge-xs">${tag}</span>
         `).join("")}
         </div>
         </div>
@@ -61,7 +64,7 @@ function kartOlustur(tarif){
     }
     async function sayfayiDoldur(){
         const tarifler = await getTarifler();
-        const tumKartlar = tarifler.map(tarif=>kartOlustur(tarif)).join();
+        const tumKartlar = tarifler.map(tarif=>kartOlustur(tarif)).join("");
         document.getElementById("recipe-container").innerHTML = tumKartlar;
     }
     sayfayiDoldur();
@@ -69,4 +72,5 @@ function kartOlustur(tarif){
     </script>
 </body>
 </html>   
+
  
